@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Computer",
+      "price": 100,
+      "checked": false
+    },
+    {
+      "id": "2",
+      "name": "Smart Phone",
+      "price": 200,
+      "checked": true
+    },
+    {
+      "id": "3",
+      "name": "Tablet",
+      "price": 150,
+      "checked": true
+    },
+    {
+      "id": "4",
+      "name": "Headphones",
+      "price": 50,
+      "checked": true
+    },
+    {
+      "id": "5",
+      "name": "Smartwatch",
+      "price": 120,
+      "checked": false
+    }
+  ]
+}
