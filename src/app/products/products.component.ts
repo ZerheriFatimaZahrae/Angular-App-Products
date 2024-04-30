@@ -13,7 +13,7 @@ import {Observable} from "rxjs";
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit{
-  products :Array<Product>=[];
+  public products :Array<Product>=[];
   public keyword : String="" ;
   // ajout de ! pour que ts ignore la intialisation de var
   constructor(private productService:ProductService) {
@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit{
 
   getProducts(){
 
-    this.productService.getProducts().subscribe(
+    this.productService.getProducts(1,3).subscribe(
       {
         next:data => {
           this.products=data
@@ -74,5 +74,17 @@ export class ProductsComponent implements OnInit{
 
   handleSearchProduct() {
 
+    this.productService.searchProduct(this.keyword).subscribe(
+      {
+        next: data => {
+          this.products = data ;
+          console.log("data" + data)
+          console.log("product:"+this.products)
+        },
+        error: err => {
+          console.log(err)
+        }
+      }
+    )
   }
 }
