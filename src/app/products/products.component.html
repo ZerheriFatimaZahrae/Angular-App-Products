@@ -3,6 +3,13 @@
     <div class="card-header">
       <h3>Products Component</h3>
     </div>
+    {{keyword}}
+    <div class="card-body">
+      <input type="text" [(ngModel)]="keyword" >
+      <button (click)="handleSearchProduct()" class="btn btn-outline-success">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
 
     <div class="card-body">
       <table class="table">
@@ -13,7 +20,7 @@
         </thead>
         <tbody>
 
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of products ">
             <td>{{product.name}}</td>
             <td>{{product.price}}</td>
             <td>
@@ -22,6 +29,12 @@
                 <i [class]="product.checked?'bi bi-check':'bi bi-circle'"></i>
               </button>
             </td>
+            <td>
+              <button (click)="handleDeleteProduct(product)" class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+
           </tr>
 
         </tbody>

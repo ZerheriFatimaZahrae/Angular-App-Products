@@ -8,6 +8,7 @@ import { ProductsComponent } from './products/products.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ProductService} from "./services/product.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 // la classe de notre componant Npm i bootstrap bootstrap-icons
 @NgModule({
@@ -20,7 +21,9 @@ import {ProductService} from "./services/product.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     ProductService

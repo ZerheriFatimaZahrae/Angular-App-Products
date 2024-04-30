@@ -1,12 +1,6 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Computer",
-      "price": 100,
-      "checked": false
-    },
-    {
       "id": "2",
       "name": "Smart Phone",
       "price": 200,
@@ -22,13 +16,19 @@
       "id": "4",
       "name": "Headphones",
       "price": 50,
-      "checked": true
+      "checked": false
     },
     {
       "id": "5",
       "name": "Smartwatch",
       "price": 120,
       "checked": false
+    },
+    {
+      "id": "6ff6",
+      "name": "Smart phone",
+      "price": 4000,
+      "checked": true
     }
   ]
 }

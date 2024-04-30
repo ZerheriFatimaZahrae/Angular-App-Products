@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import Array from "$GLOBAL$";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {ProductService} from "../services/product.service";
+import {Product} from "../model/product.model";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-products',
@@ -11,13 +13,15 @@ import {ProductService} from "../services/product.service";
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit{
-  products: Array<any> = [];
+  products :Array<Product>=[];
+  public keyword : String="" ;
+  // ajout de ! pour que ts ignore la intialisation de var
   constructor(private productService:ProductService) {
 
   }
 
 
-  handleCheckProduct(product: any) {
+  handleCheckProduct(product: Product) {
     //changer les donnees de file json , en envoyant une requete patch avec l attribut update
     this.productService.checkProduct(product)
       .subscribe(
@@ -32,6 +36,7 @@ export class ProductsComponent implements OnInit{
   }
 
   getProducts(){
+
     this.productService.getProducts().subscribe(
       {
         next:data => {
@@ -42,7 +47,10 @@ export class ProductsComponent implements OnInit{
           console.log(err)
         }
       }
-    )
+      )
+
+    //this.products=this.productService.getProducts()
+
   }
 
   //la 1er methode qui sera executer apres l affichage de component
@@ -51,4 +59,20 @@ export class ProductsComponent implements OnInit{
    this.getProducts();
    }
 
+  handleDeleteProduct(product: Product) {
+    if (confirm("Are you sure you want to delete this product")) {
+      this.productService.deleteProduct(product).subscribe(
+        {
+          next: value => {
+            //this.getProducts()
+            this.products = this.products.filter((p: Product) => p.id !== product.id)
+          }
+        }
+      );
+    }
+  }
+
+  handleSearchProduct() {
+
+  }
 }
