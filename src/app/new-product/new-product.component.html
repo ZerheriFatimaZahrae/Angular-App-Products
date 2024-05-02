@@ -8,7 +8,7 @@
         <div class="col-md-6">
           <!--[formGroup]="productForm" : pour enregistrer ts les elements ds var productForm-->
           <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
-            {{productForm.value | json}}
+
             <div class="mb-3">
               <label class="form-label" for="name">Name</label>
               <!--formControlName : la valeur qui sera saisi ds input sera stocker ds formControlName-->

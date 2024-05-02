@@ -3,7 +3,35 @@
     <div class="card-header">
       <h3>Edit-Product</h3>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="productFormGroup">
+      <!--on a ajouter le if pour que la page se charge ssi productFormGroup est charger !=null-->
+
+      <div class="row">
+        <div class="col-md-6">
+          <!--[formGroup]="productForm" : pour enregistrer ts les elements ds var productForm-->
+          <form [formGroup]="productFormGroup" (ngSubmit)="editProduct()">
+
+            <div class="mb-3">
+              <label class="form-label" for="name">Name</label>
+              <!--formControlName : la valeur qui sera saisi ds input sera stocker ds formControlName-->
+              <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="price">Price</label>
+              <input type="number" class="form-control" id="price" formControlName="price">
+            </div>
+
+            <div class="mb-3">
+              <label for="checked" class="m-lg-1">Checked</label>
+              <input type="checkbox" class="form-check-input m-lg-1" id="checked" formControlName="checked">
+            </div>
+
+            <button [disabled]="productFormGroup.invalid" type="submit" class="btn btn-success">Edit</button>
+          </form>
+        </div>
+      </div>
+
 
     </div>
   </div>

@@ -7,6 +7,7 @@ import {ProductService} from "../services/product.service";
 import {Product} from "../model/product.model";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {AppStateService} from "../services/app-state.service";
 
 @Component({
   selector: 'app-products',
@@ -14,12 +15,11 @@ import {Router} from "@angular/router";
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit{
-  public products :Array<Product>=[];
-  public keyword : String="" ;
-  public pageSize:Number =2;
-  public currentPage:Number =1;
-  public totalPages:Number =0;
-  constructor(private productService:ProductService, private router:Router) {
+
+
+  constructor(private productService:ProductService,
+              private router:Router,
+              public appState:AppStateService) {
 
   }
 
@@ -40,18 +40,18 @@ export class ProductsComponent implements OnInit{
 
   searchProducts(){
 
-    this.productService.searchProducts(this.keyword,this.currentPage,this.pageSize)
+    this.productService.searchProducts(this.appState.productState.keyword,this.appState.productState.currentPage,this.appState.productState.pageSize)
       .subscribe(
       {
         next:resp => {
-          this.products=resp.body //on a return un http response pour savoir les produits on va aceder resp.body
+          this.appState.productState.products=resp.body //on a return un http response pour savoir les produits on va aceder resp.body
           let totalProducts=parseInt(resp.headers.get('x-total-count')!)
           // @ts-ignore
-          this.totalPages = Math.floor(totalProducts / this.pageSize)
+          this.appState.productState.totalPages = Math.floor(totalProducts / this.appState.productState.pageSize)
           // @ts-ignore
-          if (totalProducts % this.pageSize != 0) {
+          if (totalProducts % this.appState.productState.pageSize != 0) {
             // @ts-ignore
-            this.totalPages += 1;
+            this.appState.productState.totalPages += 1;
           }
         },
         error : err=>{
@@ -76,7 +76,8 @@ export class ProductsComponent implements OnInit{
         {
           next: value => {
             //this.getProducts()
-            this.products = this.products.filter((p: Product) => p.id !== product.id)
+            this.appState.productState.products =
+              this.appState.productState.products.filter((p: any) => p.id !== product.id)
           }
         }
       );
@@ -86,7 +87,7 @@ export class ProductsComponent implements OnInit{
 
 
   handleGetPage(page: number) {
-    this.currentPage = page;
+    this.appState.productState.currentPage = page;
     this.searchProducts()
   }
 

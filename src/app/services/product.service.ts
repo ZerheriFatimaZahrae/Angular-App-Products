@@ -31,8 +31,14 @@ export class ProductService {
   }
 
 
-  editProduct(product: Product) {
-    return this.http.delete<Product>(`http://localhost:8089/products/${product.id}`);
 
+
+  getProductById(productId: Number) {
+    return this.http.get<Product>(`http://localhost:8089/products/${productId}`);
+
+  }
+
+  editProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(`http://localhost:8089/products/${product.id}`,product);
   }
 }
