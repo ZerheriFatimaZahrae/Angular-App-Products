@@ -4,13 +4,13 @@
       "id": "2",
       "name": "Smart Phone",
       "price": 200,
-      "checked": false
+      "checked": true
     },
     {
       "id": "3",
       "name": "Tablet",
       "price": 150,
-      "checked": true
+      "checked": false
     },
     {
       "id": "4",
@@ -26,12 +26,6 @@
     },
     {
       "id": "6",
-      "name": "Smart phone",
-      "price": 4000,
-      "checked": true
-    },
-    {
-      "id": "7",
       "name": "Smart phone",
       "price": 4000,
       "checked": true

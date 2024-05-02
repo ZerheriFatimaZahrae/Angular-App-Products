@@ -39,23 +39,40 @@ export class ProductsComponent implements OnInit{
   }
 
   searchProducts(){
+    this.appState.setProductsState({
+      status:"LOADING"
+    })
 
     this.productService.searchProducts(this.appState.productState.keyword,this.appState.productState.currentPage,this.appState.productState.pageSize)
       .subscribe(
       {
         next:resp => {
-          this.appState.productState.products=resp.body //on a return un http response pour savoir les produits on va aceder resp.body
+          let products=resp.body //on a return un http response pour savoir les produits on va aceder resp.body
           let totalProducts=parseInt(resp.headers.get('x-total-count')!)
-          // @ts-ignore
-          this.appState.productState.totalPages = Math.floor(totalProducts / this.appState.productState.pageSize)
+          //this.appState.productState.totalProducts=totalProducts
+
+          let totalPages = Math.floor(totalProducts / this.appState.productState.pageSize)
           // @ts-ignore
           if (totalProducts % this.appState.productState.pageSize != 0) {
             // @ts-ignore
-            this.appState.productState.totalPages += 1;
+            totalPages += 1;
           }
+          this.appState.setProductsState({
+            products:products,
+            totalProducts:totalProducts,
+            totalPages:totalPages,
+            keyword:this.appState.productState.keyword,
+            currentPage:this.appState.productState.currentPage,
+            pageSize:this.appState.productState.pageSize,
+            status:"LOADED"
+          })
         },
         error : err=>{
           console.log(err)
+          this.appState.setProductsState({
+            status:"ERROR",
+            errorMessage: err
+          })
         }
       }
       )
@@ -75,9 +92,9 @@ export class ProductsComponent implements OnInit{
       this.productService.deleteProduct(product).subscribe(
         {
           next: value => {
-            //this.getProducts()
-            this.appState.productState.products =
-              this.appState.productState.products.filter((p: any) => p.id !== product.id)
+            this.searchProducts()
+            //this.appState.productState.products =
+            //this.appState.productState.products.filter((p: any) => p.id !== product.id)
           }
         }
       );

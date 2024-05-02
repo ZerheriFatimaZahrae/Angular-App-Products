@@ -11,6 +11,7 @@ import {ProductService} from "./services/product.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 // la classe de notre componant Npm i bootstrap bootstrap-icons
 @NgModule({
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProductsComponent,
     NewProductComponent,
     EditProductComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,5 @@
-<nav class="p-3">
-  <ul class="nav nav-pills">
-    <li *ngFor="let action of actions">
-      <button
-        routerLink="{{action.route}}"
-        [class]="action==currentAction? 'btn btn-success ms-1':'btn btn-outline-success ms-1'"
-        (click)="setCurrentAction(action)"
-       >
-        {{action.title}} <i class="{{action.icon}} text-success"></i>
-      </button>
-    </li>
-
-  </ul>
-</nav>
+<!--Pour afficher navbar ds component navbar-->
+<app-navbar></app-navbar>
 <!--C est le selector de mon component dashboard pour l afficher ds mon app-->
 <app-dashboard></app-dashboard>
 <!-- les elements generer par router sont affiche ici -->

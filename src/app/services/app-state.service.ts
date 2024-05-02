@@ -18,8 +18,13 @@ export class AppStateService {
     pageSize:3,
     currentPage:1,
     totalPages:0,
-
-
+    totalProducts:0,
+    status:"",
+    errorMessage:""
+  }
+  public setProductsState(state :any){
+    //faire une copie par ... des elements de productState puis l element ds state sera ecraser
+    this.productState={...this.productState,...state};
   }
 
   constructor() { }

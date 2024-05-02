@@ -1,1 +1,37 @@
-<p>dashboard works!</p>
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <ul class="nav nav-pills">
+        <li>
+          <label class="border border-success bg-success text-white p-1 m-1 ">
+            Total:{{appState.productState.totalProducts}}
+          </label>
+        </li>
+        <li>
+          <label class="border border-info bg-info text-white p-1 m-1 ">
+            Checked:{{totalCheckedProducts()}}
+          </label>
+        </li>
+        <li>
+          <label class="border border-primary bg-primary text-white p-1 m-1 ">
+            Pages:{{appState.productState.pageSize}}
+          </label>
+        </li>
+        <li>
+          <label class="border border-black bg-black text-white p-1 m-1 ">
+            Size:{{appState.productState.pageSize}}
+          </label>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <nav class="p-3">
+
+  </nav>
+
+</div>

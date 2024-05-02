@@ -8,25 +8,26 @@ import {Product} from "../model/product.model";
   providedIn: 'root'
 })
 export class ProductService {
+  private host:String ="http://localhost:8089/products"
 
   constructor(private http:HttpClient) { }
   public searchProducts(keyword :String,page:Number=1 , size:Number=4) {
     //observe:'response' : pour aceder a la requete http afin de pouvoir lire attr  X-Total-Count
-    return this.http.get(`http://localhost:8089/products?name_like=${keyword}&_page=${page}&_limit=${size}`
+    return this.http.get(`${this.host}?name_like=${keyword}&_page=${page}&_limit=${size}`
       ,{observe:'response'})
 
   }
   public checkProduct(product:Product):Observable<Product>{
-    return this.http.patch<Product>(`http://localhost:8089/products/${product.id}`,
+    return this.http.patch<Product>(`${this.host}/${product.id}`,
       {checked:!product.checked});
   }
 
   public deleteProduct(product:Product){
-    return this.http.delete<Product>(`http://localhost:8089/products/${product.id}`);
+    return this.http.delete<Product>(`${this.host}/${product.id}`);
   }
 
   saveProduct(product: Product) {
-    return this.http.post<Product>(`http://localhost:8089/products`,
+    return this.http.post<Product>(`${this.host}`,
       product);
   }
 
@@ -34,11 +35,11 @@ export class ProductService {
 
 
   getProductById(productId: Number) {
-    return this.http.get<Product>(`http://localhost:8089/products/${productId}`);
+    return this.http.get<Product>(`${this.host}/${productId}`);
 
   }
 
   editProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`http://localhost:8089/products/${product.id}`,product);
+    return this.http.put<Product>(`${this.host}/${product.id}`,product);
   }
 }
