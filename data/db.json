@@ -25,7 +25,37 @@
       "checked": false
     },
     {
-      "id": "6ff6",
+      "id": "6",
+      "name": "Smart phone",
+      "price": 4000,
+      "checked": true
+    },
+    {
+      "id": "7",
+      "name": "Smart phone",
+      "price": 4000,
+      "checked": true
+    },
+    {
+      "id": "8",
+      "name": "Smart phone",
+      "price": 4000,
+      "checked": true
+    },
+    {
+      "id": "9",
+      "name": "Smart phone",
+      "price": 4000,
+      "checked": true
+    },
+    {
+      "id": "10",
+      "name": "Smart phone",
+      "price": 4000,
+      "checked": true
+    },
+    {
+      "id": "11",
       "name": "Smart phone",
       "price": 4000,
       "checked": true

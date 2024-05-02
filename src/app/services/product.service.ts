@@ -10,8 +10,10 @@ import {Product} from "../model/product.model";
 export class ProductService {
 
   constructor(private http:HttpClient) { }
-  public getProducts(page:Number=1 , size:Number=4) :Observable<Array<Product>>{
-    return this.http.get<Array<Product>>(`http://localhost:8089/products?_page=${page}&_limit=${size}`)
+  public searchProducts(keyword :String,page:Number=1 , size:Number=4) {
+    //observe:'response' : pour aceder a la requete http afin de pouvoir lire attr  X-Total-Count
+    return this.http.get(`http://localhost:8089/products?name_like=${keyword}&_page=${page}&_limit=${size}`
+      ,{observe:'response'})
 
   }
   public checkProduct(product:Product):Observable<Product>{
@@ -28,9 +30,9 @@ export class ProductService {
       product);
   }
 
-  public searchProduct(keyword :String) : Observable<Array<Product>> {
 
-    return this.http.get<Array<Product>>(`http://localhost:8089/products?name_like=${keyword}`,
-    );
+  editProduct(product: Product) {
+    return this.http.delete<Product>(`http://localhost:8089/products/${product.id}`);
+
   }
 }

@@ -6,6 +6,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 import {ProductService} from "../services/product.service";
 import {Product} from "../model/product.model";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -15,8 +16,10 @@ import {Observable} from "rxjs";
 export class ProductsComponent implements OnInit{
   public products :Array<Product>=[];
   public keyword : String="" ;
-  // ajout de ! pour que ts ignore la intialisation de var
-  constructor(private productService:ProductService) {
+  public pageSize:Number =2;
+  public currentPage:Number =1;
+  public totalPages:Number =0;
+  constructor(private productService:ProductService, private router:Router) {
 
   }
 
@@ -35,13 +38,21 @@ export class ProductsComponent implements OnInit{
 
   }
 
-  getProducts(){
+  searchProducts(){
 
-    this.productService.getProducts(1,3).subscribe(
+    this.productService.searchProducts(this.keyword,this.currentPage,this.pageSize)
+      .subscribe(
       {
-        next:data => {
-          this.products=data
-          console.log("data"+data)
+        next:resp => {
+          this.products=resp.body //on a return un http response pour savoir les produits on va aceder resp.body
+          let totalProducts=parseInt(resp.headers.get('x-total-count')!)
+          // @ts-ignore
+          this.totalPages = Math.floor(totalProducts / this.pageSize)
+          // @ts-ignore
+          if (totalProducts % this.pageSize != 0) {
+            // @ts-ignore
+            this.totalPages += 1;
+          }
         },
         error : err=>{
           console.log(err)
@@ -56,7 +67,7 @@ export class ProductsComponent implements OnInit{
   //la 1er methode qui sera executer apres l affichage de component
   //telecharger data par file json apres l execution de cmd: json-server -w data/db.json -p 8089
   ngOnInit(): void {
-   this.getProducts();
+   this.searchProducts();
    }
 
   handleDeleteProduct(product: Product) {
@@ -72,19 +83,14 @@ export class ProductsComponent implements OnInit{
     }
   }
 
-  handleSearchProduct() {
 
-    this.productService.searchProduct(this.keyword).subscribe(
-      {
-        next: data => {
-          this.products = data ;
-          console.log("data" + data)
-          console.log("product:"+this.products)
-        },
-        error: err => {
-          console.log(err)
-        }
-      }
-    )
+
+  handleGetPage(page: number) {
+    this.currentPage = page;
+    this.searchProducts()
+  }
+
+  handleEditProduct(product: Product) {
+    this.router.navigateByUrl(`/editProduct/${product.id}`)
   }
 }
