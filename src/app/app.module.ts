@@ -12,6 +12,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ErrorComponent } from './error/error.component';
+import { AppErrorComponent } from './app-error/app-error.component';
 
 // la classe de notre componant Npm i bootstrap bootstrap-icons
 @NgModule({
@@ -22,7 +24,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     NewProductComponent,
     EditProductComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    ErrorComponent,
+    AppErrorComponent
   ],
   imports: [
     BrowserModule,

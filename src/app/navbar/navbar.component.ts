@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AppStateService} from "../services/app-state.service";
 
 @Component({
   selector: 'app-navbar',
@@ -19,8 +20,13 @@ export class NavbarComponent {
   ];
   currentAction:any
 
+  constructor(public appState: AppStateService) {
+
+  }
+
   setCurrentAction(action: any) {
     this.currentAction = action;
   }
+
 
 }
