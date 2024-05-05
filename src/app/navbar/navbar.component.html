@@ -9,7 +9,7 @@
         {{action.title}} <i class="{{action.icon}} text-success"></i>
       </button>
     </li>
-    <li *ngIf="appState.productState.status=='LOADING'">
+    <li *ngIf="loadoingService.isLoading$ | async">
       <div class="spinner-border text-primary ms-2" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>

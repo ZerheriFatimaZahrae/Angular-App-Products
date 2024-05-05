@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AppStateService} from "../services/app-state.service";
+import {LoadingService} from "../services/loading.service";
 
 @Component({
   selector: 'app-navbar',
@@ -18,9 +19,21 @@ export class NavbarComponent {
       title : "New Products" , route:"/newProduct",icon:"bi bi-plus-circle"
     } ,
   ];
-  currentAction:any
+  currentAction:any;
+ // public isLoading:boolean=false;
 
-  constructor(public appState: AppStateService) {
+  constructor(public appState: AppStateService,
+              public loadoingService:LoadingService) {
+    /*
+    this.loadoingService.isLoading$.subscribe(
+      {
+        next:isLoading => {
+          this.isLoading=isLoading;
+        }
+      }
+    );
+
+     */
 
   }
 

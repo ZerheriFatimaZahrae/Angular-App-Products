@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../services/product.service";
 import {validateAndRewriteCoreSymbol} from "@angular/compiler-cli/src/ngtsc/imports";
+import {AppStateService} from "../services/app-state.service";
 
 @Component({
   selector: 'app-new-product',
@@ -11,7 +12,9 @@ import {validateAndRewriteCoreSymbol} from "@angular/compiler-cli/src/ngtsc/impo
 export class NewProductComponent implements OnInit {
 
   public productForm!: FormGroup;
-  constructor(private formBuilder :FormBuilder , private productService:ProductService) {
+  constructor(private formBuilder :FormBuilder ,
+              private productService:ProductService,
+              private appState:AppStateService) {
 
   }
   ngOnInit(): void {
@@ -23,17 +26,34 @@ export class NewProductComponent implements OnInit {
   }
 
   saveProduct() {
+    /*
+
+    this.appState.setProductsState({
+      status:"LOADING"
+    })
+
+     */
     let product=this.productForm.value
     this.productService.saveProduct(product).subscribe(
       {
         next:data => {
           console.log(data)
           alert(JSON.stringify(data))
+         // status:"LOADED"
+
         },
         error : err=>{
-          console.log(err)
-        }
-      }
-    )
+/*
+
+      this.appState.setProductsState({
+        status:"ERROR",
+        errorMessage: err
+      })
+
+ */
+      console.log(err)
+    }
   }
+)
+}
 }

@@ -39,9 +39,12 @@ export class ProductsComponent implements OnInit{
   }
 
   searchProducts(){
+    /*
     this.appState.setProductsState({
       status:"LOADING"
     })
+
+     */
 
     this.productService.searchProducts(this.appState.productState.keyword,this.appState.productState.currentPage,this.appState.productState.pageSize)
       .subscribe(
@@ -64,51 +67,55 @@ export class ProductsComponent implements OnInit{
             keyword:this.appState.productState.keyword,
             currentPage:this.appState.productState.currentPage,
             pageSize:this.appState.productState.pageSize,
-            status:"LOADED"
+           // status:"LOADED"
           })
         },
         error : err=>{
           console.log(err)
-          this.appState.setProductsState({
-            status:"ERROR",
-            errorMessage: err
-          })
-        }
-      }
-      )
+/*
 
-    //this.products=this.productService.getProducts()
+      this.appState.setProductsState({
+        status:"ERROR",
+        errorMessage: err
+      })
 
-  }
-
-  //la 1er methode qui sera executer apres l affichage de component
-  //telecharger data par file json apres l execution de cmd: json-server -w data/db.json -p 8089
-  ngOnInit(): void {
-   this.searchProducts();
-   }
-
-  handleDeleteProduct(product: Product) {
-    if (confirm("Are you sure you want to delete this product")) {
-      this.productService.deleteProduct(product).subscribe(
-        {
-          next: value => {
-            this.searchProducts()
-            //this.appState.productState.products =
-            //this.appState.productState.products.filter((p: any) => p.id !== product.id)
-          }
-        }
-      );
+ */
     }
   }
+  )
+
+//this.products=this.productService.getProducts()
+
+}
+
+//la 1er methode qui sera executer apres l affichage de component
+//telecharger data par file json apres l execution de cmd: json-server -w data/db.json -p 8089
+ngOnInit(): void {
+this.searchProducts();
+}
+
+handleDeleteProduct(product: Product) {
+if (confirm("Are you sure you want to delete this product")) {
+  this.productService.deleteProduct(product).subscribe(
+    {
+      next: value => {
+        this.searchProducts()
+        //this.appState.productState.products =
+        //this.appState.productState.products.filter((p: any) => p.id !== product.id)
+      }
+    }
+  );
+}
+}
 
 
 
-  handleGetPage(page: number) {
-    this.appState.productState.currentPage = page;
-    this.searchProducts()
-  }
+handleGetPage(page: number) {
+this.appState.productState.currentPage = page;
+this.searchProducts()
+}
 
-  handleEditProduct(product: Product) {
-    this.router.navigateByUrl(`/editProduct/${product.id}`)
-  }
+handleEditProduct(product: Product) {
+this.router.navigateByUrl(`/editProduct/${product.id}`)
+}
 }

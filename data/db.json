@@ -16,7 +16,7 @@
       "id": "4",
       "name": "Headphones",
       "price": 50,
-      "checked": false
+      "checked": true
     },
     {
       "id": "5",
