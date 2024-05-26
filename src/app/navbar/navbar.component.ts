@@ -10,13 +10,13 @@ import {LoadingService} from "../services/loading.service";
 export class NavbarComponent {
   actions : Array<any> =[
     {
-      title : "Home" , route:"/home",icon:"bi bi-house"
+      title : "Home" , route:"/admin/home",icon:"bi bi-house"
     } ,
     {
-      title : "Products" , route:"/products",icon:"bi bi-archive"
+      title : "Products" , route:"/admin/products",icon:"bi bi-archive"
     } ,
     {
-      title : "New Products" , route:"/newProduct",icon:"bi bi-plus-circle"
+      title : "New Products" , route:"/admin/newProduct",icon:"bi bi-plus-circle"
     } ,
   ];
   currentAction:any;

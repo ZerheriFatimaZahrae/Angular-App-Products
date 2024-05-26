@@ -14,6 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppErrorComponent } from './app-error/app-error.component';
 import {AppHttpInterceptor} from "./services/app-http.interceptor";
+import { LoginComponent } from './login/login.component';
+import { AdminTemplateComponent } from './admin-template/admin-template.component';
 
 // la classe de notre componant Npm i bootstrap bootstrap-icons
 @NgModule({
@@ -26,6 +28,8 @@ import {AppHttpInterceptor} from "./services/app-http.interceptor";
     DashboardComponent,
     AppErrorComponent,
     NavbarComponent,
+    LoginComponent,
+    AdminTemplateComponent,
 
   ],
   imports: [
